@@ -1,0 +1,12 @@
+Ale fallisce una prova x
+Ale vince una prova x
+Ad Ale cade la corona di testa 1/N volte
+Ale indovina 1/N lettere a passalessandra
+Ale sbaglia 1/N lettere a passalessandra
+Ale passa 1/N lettere a passalessandra
+Ale si veste di nero
+Vince il concorrente opposto a passalessandra
+Ale indovina la faccia al tatto della persona X
+Io/invitato X viene scelto per la lezione di inglese
+Ale grida "W i Doodle!"
+Ale grida "M i Doodle!"
