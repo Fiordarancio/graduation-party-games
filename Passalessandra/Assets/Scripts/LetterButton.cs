@@ -8,33 +8,66 @@ using TMPro;
 public class LetterButton : MonoBehaviour
 {
     public UIManager uIManager; // Manager to pass reset for timers ecc.
-    public TMP_Text questionText;
-    public TMP_Text answerText;
-    // public Panel QuestionPanel; // Modify the panel?
-    public enum Status
-    {
-        DEFAULT, CORRECT, INCORRECT, SKIPPED
-    };
-    private Status status = Status.DEFAULT;
+
+    public Status status = Status.DEFAULT;
+    public int index = 0;
+
+    [Header("Sprites")]
+    public Sprite defaultSprite;
+    public Sprite correctSprite;
+    public Sprite wrongSprite;
+    public Sprite idleSprite;
 
 
     // When the letter is clicked, it is activated
-    public void SelectLetter(int index)
+    public void SelectLetter()
     {
         // Show the question of the letter
-        questionText.text = uIManager.GetActivePlayerQuestion(index);
+        uIManager.ShowActiveQuestion(index);
+
+        
         // Show the answer, the sprite ecc, depending on letter status
         switch(status)
         {
             case Status.DEFAULT: default:
                 // Show default sprite
+                SetSprite(defaultSprite);
             break;
             case Status.CORRECT:
+                SetSprite(correctSprite);
             break;
-            case Status.INCORRECT:
+            case Status.WRONG:
+                SetSprite(wrongSprite);
             break;
-            case Status.SKIPPED:
+            case Status.IDLE:
+                SetSprite(idleSprite);
             break;
         }
+    }
+
+    public void SetStatus (Status newStatus)
+    {
+        switch(newStatus)
+        {
+            case Status.DEFAULT: default:
+                // Show default sprite
+                SetSprite(defaultSprite);
+            break;
+            case Status.CORRECT:
+                SetSprite(correctSprite);
+            break;
+            case Status.WRONG:
+                SetSprite(wrongSprite);
+            break;
+            case Status.IDLE:
+                SetSprite(idleSprite);
+            break;
+        }
+        status = newStatus;
+    }
+
+    public void SetSprite (Sprite s)
+    {
+        GetComponent<Button>().GetComponent<Image>().sprite = s;
     }
 }
