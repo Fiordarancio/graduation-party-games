@@ -7,7 +7,7 @@ using TMPro;
 // Behavior of a letter
 public class LetterButton : MonoBehaviour
 {
-    public UIManager uIManager; // Manager to pass reset for timers ecc.
+    private UIManager uiManager; // Manager to pass reset for timers ecc.
 
     public Status status = Status.DEFAULT;
     public int index = 0;
@@ -19,28 +19,46 @@ public class LetterButton : MonoBehaviour
     public Sprite idleSprite;
 
 
+    private void Awake() 
+    {
+        // Try to get the UIManager
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+    }
+
+
     // When the letter is clicked, it is activated
     public void SelectLetter()
     {
-        // Show the question of the letter
-        uIManager.ShowActiveQuestion(index);
+        if (uiManager == null)
+        {
+            Debug.LogError("Missing UIManager in Scene!");
+            return;
+        }
 
-        
+        // Show the question of the letter
+        uiManager.ShowActiveQuestion(index);
+
         // Show the answer, the sprite ecc, depending on letter status
         switch(status)
         {
             case Status.DEFAULT: default:
+                Debug.Log("Start new letter");
                 // Show default sprite
                 SetSprite(defaultSprite);
+                // Start timer
+                uiManager.StartTimer();
             break;
             case Status.CORRECT:
                 SetSprite(correctSprite);
             break;
             case Status.WRONG:
+                Debug.Log("Pass wrong");
                 SetSprite(wrongSprite);
             break;
             case Status.IDLE:
+                Debug.Log("Pass idle");
                 SetSprite(idleSprite);
+                uiManager.StartTimer();
             break;
         }
     }
