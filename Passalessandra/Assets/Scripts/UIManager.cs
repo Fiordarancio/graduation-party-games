@@ -14,20 +14,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] string [] answersA;
     [SerializeField] string [] answersB;
 
-    [Header("Game elements")]
-    // Timer
+    [Header("Timer")]
     private int timerA, timerB;
     private bool timerGoing;
     private int min, sec;
     public TMP_Text timerTextA, timerTextB;
-    // Scores
+    [Header("Scores")]
     public int scoreA, scoreB;
     public TMP_Text scoreTextA, scoreTextB;
-    // Texts
+    [Header("Texts")]
     public TMP_Text questionText;
     public TMP_Text answerText;
-    // Letters parent (for changing sprite)
-    public Transform lettersA, lettersB;
+    public Animator answerAnimator;
 
     private bool isPlayerA = true;
     public int activeIndexA = 0, activeIndexB = 0;
@@ -35,6 +33,8 @@ public class UIManager : MonoBehaviour
     [Header("Player Panels")]
     public CanvasGroup PanelA;
     public CanvasGroup PanelB;
+    // Letters parent (for changing sprite)
+    public Transform lettersA, lettersB;
     
 
     
@@ -44,101 +44,101 @@ public class UIManager : MonoBehaviour
         // Player A
         questionsA = new string[LTNUM] 
         {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "Z"
+            "PlayerA question A",
+            "PlayerA question B",
+            "PlayerA question C",
+            "PlayerA question D",
+            "PlayerA question E",
+            "PlayerA question F",
+            "PlayerA question G",
+            "PlayerA question H",
+            "PlayerA question I",
+            "PlayerA question L",
+            "PlayerA question M",
+            "PlayerA question N",
+            "PlayerA question O",
+            "PlayerA question P",
+            "PlayerA question Q",
+            "PlayerA question R",
+            "PlayerA question S",
+            "PlayerA question T",
+            "PlayerA question U",
+            "PlayerA question V",
+            "PlayerA question Z"
         };
         answersA = new string[LTNUM] 
         {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "Z"
+            "PlayerA answer A",
+            "PlayerA answer B",
+            "PlayerA answer C",
+            "PlayerA answer D",
+            "PlayerA answer E",
+            "PlayerA answer F",
+            "PlayerA answer G",
+            "PlayerA answer H",
+            "PlayerA answer I",
+            "PlayerA answer L",
+            "PlayerA answer M",
+            "PlayerA answer N",
+            "PlayerA answer O",
+            "PlayerA answer P",
+            "PlayerA answer Q",
+            "PlayerA answer R",
+            "PlayerA answer S",
+            "PlayerA answer T",
+            "PlayerA answer U",
+            "PlayerA answer V",
+            "PlayerA answer Z"
         };
 
         // Player B
         questionsB = new string[LTNUM] 
         {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "Z"
+            "PlayerB question A",
+            "PlayerB question B",
+            "PlayerB question C",
+            "PlayerB question D",
+            "PlayerB question E",
+            "PlayerB question F",
+            "PlayerB question G",
+            "PlayerB question H",
+            "PlayerB question I",
+            "PlayerB question L",
+            "PlayerB question M",
+            "PlayerB question N",
+            "PlayerB question O",
+            "PlayerB question P",
+            "PlayerB question Q",
+            "PlayerB question R",
+            "PlayerB question S",
+            "PlayerB question T",
+            "PlayerB question U",
+            "PlayerB question V",
+            "PlayerB question Z"
         };
         answersB = new string[LTNUM] 
         {
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-            "H",
-            "I",
-            "L",
-            "M",
-            "N",
-            "O",
-            "P",
-            "Q",
-            "R",
-            "S",
-            "T",
-            "U",
-            "V",
-            "Z"
+            "PlayerB answer A",
+            "PlayerB answer B",
+            "PlayerB answer C",
+            "PlayerB answer D",
+            "PlayerB answer E",
+            "PlayerB answer F",
+            "PlayerB answer G",
+            "PlayerB answer H",
+            "PlayerB answer I",
+            "PlayerB answer L",
+            "PlayerB answer M",
+            "PlayerB answer N",
+            "PlayerB answer O",
+            "PlayerB answer P",
+            "PlayerB answer Q",
+            "PlayerB answer R",
+            "PlayerB answer S",
+            "PlayerB answer T",
+            "PlayerB answer U",
+            "PlayerB answer V",
+            "PlayerB answer Z"
         };
     
     }
@@ -222,9 +222,11 @@ public class UIManager : MonoBehaviour
     // Buttons for validation
     public void AnswerCorrect()
     {
+        Debug.Log("Answer is correct!");
         // Stop timer
         StopTimer();
         // Animate answer
+        AnimateAnswer();
         // Set status of letter
         if (isPlayerA)
         {
@@ -351,4 +353,9 @@ public class UIManager : MonoBehaviour
     }
 
 
+    private void AnimateAnswer()
+    {
+        // TODO adapt on which sprite to show
+        answerAnimator.SetTrigger("Show");
+    }
 }
