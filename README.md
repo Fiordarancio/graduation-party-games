@@ -1,5 +1,5 @@
 # Giochi per feste di laurea
- Questi giochi sono stati ideati dapprima per una neolaureata, che chiameremo genericamente Alessandra. Tuttavia, sono facilmente personalizzabili per il vostro festeggiato di turno.
+ Questi giochi sono stati ideati dapprima per una neolaureata, che chiameremo genericamente Alessandra. Tuttavia, sono facilmente personalizzabili per chiunque vogliate festeggiare!
  
 ## Fantalessandra (gioco live)
  Il Fantasanremo ha spopolato durante l'ultima edizione. Tutti gli invitati potranno scommettere su cosa la festeggiata farà o non farà durante i giochi e la serata in generale. Chi vince avrà accesso esclusivo ad un selfie con lei, e magari alla prima fetta di torta.
