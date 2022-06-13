@@ -5,9 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 
 // Behavior of a letter
+
+// TODO LATER: should be better that each letter has its own question/answer couple?
 public class LetterButton : MonoBehaviour
 {
-    private UIManager uiManager; // Manager to pass reset for timers ecc.
+    // private UIManager uiManager; // Manager to pass reset for timers ecc.
+    private UXManager uxManager;
 
     public Status status = Status.DEFAULT;
     public int index = 0;
@@ -21,44 +24,47 @@ public class LetterButton : MonoBehaviour
 
     private void Awake() 
     {
-        // Try to get the UIManager
-        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        // Try to get the UIManager and its UXManager component
+        uxManager = GameObject.Find("UIManager").GetComponent<UXManager>();
     }
 
 
     // When the letter is clicked, it is activated
     public void SelectLetter()
     {
-        if (uiManager == null)
+        if (uxManager == null)
         {
-            Debug.LogError("Missing UIManager in Scene!");
+            Debug.LogError("Missing UX Manager in Scene!");
             return;
         }
 
         // Show the question of the letter
-        uiManager.ShowActiveQuestion(index);
+        uxManager.ShowCurrentQuestion(index, status);
 
         // Show the answer, the sprite ecc, depending on letter status
         switch(status)
         {
             case Status.DEFAULT: default:
-                Debug.Log("Start new letter");
+                Debug.Log("Opening new letter");
                 // Show default sprite
                 SetSprite(defaultSprite);
-                // Start timer
-                uiManager.StartTimer();
+                // Start the player
+                uxManager.StartPlayer();
             break;
             case Status.CORRECT:
                 SetSprite(correctSprite);
+                uxManager.ShowGivenAnswer(index, status);
             break;
             case Status.WRONG:
-                Debug.Log("Pass wrong");
+                Debug.Log("Passing wrong");
                 SetSprite(wrongSprite);
+                uxManager.ShowGivenAnswer(index, status);
             break;
             case Status.IDLE:
-                Debug.Log("Pass idle");
+                Debug.Log("Passing idle");
                 SetSprite(idleSprite);
-                uiManager.StartTimer();
+                // Start the player
+                uxManager.StartPlayer();
             break;
         }
     }

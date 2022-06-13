@@ -10,11 +10,11 @@ public class ArrangeLetters : MonoBehaviour
 {
     public Transform lettersParent;
     public float radius = 125f;
-
+    public string playerName = "Player";
 
     void Start()
     {
-        Debug.Log("Player has "+lettersParent.childCount+" letters to guess");
+        Debug.Log(playerName + " has "+lettersParent.childCount+" letters to guess");
         // Step angle for each point
         float step = 2*Mathf.PI/lettersParent.childCount;
         float angle;

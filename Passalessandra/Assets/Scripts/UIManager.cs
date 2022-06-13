@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
+
+// TODO: make singleton
 
 public class UIManager : MonoBehaviour
 {
+    private string savePath = "/external/questions.json";
+
     private const int LTNUM = 21;
     [Header("List of questions")]
     [SerializeField] string [] questionsA;
@@ -25,7 +30,8 @@ public class UIManager : MonoBehaviour
     [Header("Texts")]
     public TMP_Text questionText;
     public TMP_Text answerText;
-    public Animator answerAnimator;
+    public Animator answerPanelAnimator;
+    public Image answerPanelSprite;
 
     private bool isPlayerA = true;
     public int activeIndexA = 0, activeIndexB = 0;
@@ -40,107 +46,7 @@ public class UIManager : MonoBehaviour
     
     private void Awake() {
         // TODO: load from a JSON file!!!
-
-        // Player A
-        questionsA = new string[LTNUM] 
-        {
-            "PlayerA question A",
-            "PlayerA question B",
-            "PlayerA question C",
-            "PlayerA question D",
-            "PlayerA question E",
-            "PlayerA question F",
-            "PlayerA question G",
-            "PlayerA question H",
-            "PlayerA question I",
-            "PlayerA question L",
-            "PlayerA question M",
-            "PlayerA question N",
-            "PlayerA question O",
-            "PlayerA question P",
-            "PlayerA question Q",
-            "PlayerA question R",
-            "PlayerA question S",
-            "PlayerA question T",
-            "PlayerA question U",
-            "PlayerA question V",
-            "PlayerA question Z"
-        };
-        answersA = new string[LTNUM] 
-        {
-            "PlayerA answer A",
-            "PlayerA answer B",
-            "PlayerA answer C",
-            "PlayerA answer D",
-            "PlayerA answer E",
-            "PlayerA answer F",
-            "PlayerA answer G",
-            "PlayerA answer H",
-            "PlayerA answer I",
-            "PlayerA answer L",
-            "PlayerA answer M",
-            "PlayerA answer N",
-            "PlayerA answer O",
-            "PlayerA answer P",
-            "PlayerA answer Q",
-            "PlayerA answer R",
-            "PlayerA answer S",
-            "PlayerA answer T",
-            "PlayerA answer U",
-            "PlayerA answer V",
-            "PlayerA answer Z"
-        };
-
-        // Player B
-        questionsB = new string[LTNUM] 
-        {
-            "PlayerB question A",
-            "PlayerB question B",
-            "PlayerB question C",
-            "PlayerB question D",
-            "PlayerB question E",
-            "PlayerB question F",
-            "PlayerB question G",
-            "PlayerB question H",
-            "PlayerB question I",
-            "PlayerB question L",
-            "PlayerB question M",
-            "PlayerB question N",
-            "PlayerB question O",
-            "PlayerB question P",
-            "PlayerB question Q",
-            "PlayerB question R",
-            "PlayerB question S",
-            "PlayerB question T",
-            "PlayerB question U",
-            "PlayerB question V",
-            "PlayerB question Z"
-        };
-        answersB = new string[LTNUM] 
-        {
-            "PlayerB answer A",
-            "PlayerB answer B",
-            "PlayerB answer C",
-            "PlayerB answer D",
-            "PlayerB answer E",
-            "PlayerB answer F",
-            "PlayerB answer G",
-            "PlayerB answer H",
-            "PlayerB answer I",
-            "PlayerB answer L",
-            "PlayerB answer M",
-            "PlayerB answer N",
-            "PlayerB answer O",
-            "PlayerB answer P",
-            "PlayerB answer Q",
-            "PlayerB answer R",
-            "PlayerB answer S",
-            "PlayerB answer T",
-            "PlayerB answer U",
-            "PlayerB answer V",
-            "PlayerB answer Z"
-        };
-    
+        LoadQuestions();
     }
 
     private void Start() {
@@ -219,12 +125,17 @@ public class UIManager : MonoBehaviour
     }
 
 
-    // Buttons for validation
+    // Buttons for validation\
+    public Image answerCorrectSprite;
+    public Image answerWrongSprite;
+
     public void AnswerCorrect()
     {
         Debug.Log("Answer is correct!");
         // Stop timer
         StopTimer();
+        // Change panel colors
+        
         // Animate answer
         AnimateAnswer();
         // Set status of letter
@@ -355,7 +266,153 @@ public class UIManager : MonoBehaviour
 
     private void AnimateAnswer()
     {
-        // TODO adapt on which sprite to show
-        answerAnimator.SetTrigger("Show");
+        answerPanelAnimator.SetTrigger("Show");
+        // TODO LATER: animate text
+        answerText.text = (isPlayerA)? answersA[activeIndexA] : answersB[activeIndexB];
+        answerText.gameObject.SetActive(true);
+    }
+    private void ResetAnimation()
+    {
+        // Should do nothing if in Still state
+        answerPanelAnimator.SetTrigger("Hide");
+        answerText.gameObject.SetActive(false);
+    }
+
+
+    [System.Serializable]
+    public class customQA 
+    {
+        public string[] questionsA;
+        public string[] questionsB;
+        public string[] answersA;
+        public string[] answersB;
+    }
+
+    private void LoadQuestions()
+    {
+        // Get the file from which we want to serialize and check it's existence
+        string filePath = Application.persistentDataPath + savePath;
+        Debug.Log("Searching for custom questions...");
+
+        if (File.Exists(filePath))
+        {
+            // Deserialize and transfer info to the manager
+            string fileText = File.ReadAllText(filePath);
+            customQA data = JsonUtility.FromJson<customQA>(fileText);
+
+            questionsA = data.questionsA;
+            questionsB = data.questionsB;
+            answersA = data.answersA;
+            answersB = data.answersB;
+        }
+        else
+        {
+            // Load the generic file if not found (and save)
+            StaticLoad();
+        }
+    }
+
+    // TODO to be deleted
+    private void StaticLoad()
+    {
+        // Player A
+        questionsA = new string[LTNUM] 
+        {
+            "PlayerA question A",
+            "PlayerA question B",
+            "PlayerA question C",
+            "PlayerA question D",
+            "PlayerA question E",
+            "PlayerA question F",
+            "PlayerA question G",
+            "PlayerA question H",
+            "PlayerA question I",
+            "PlayerA question L",
+            "PlayerA question M",
+            "PlayerA question N",
+            "PlayerA question O",
+            "PlayerA question P",
+            "PlayerA question Q",
+            "PlayerA question R",
+            "PlayerA question S",
+            "PlayerA question T",
+            "PlayerA question U",
+            "PlayerA question V",
+            "PlayerA question Z"
+        };
+        answersA = new string[LTNUM] 
+        {
+            "PlayerA answer A",
+            "PlayerA answer B",
+            "PlayerA answer C",
+            "PlayerA answer D",
+            "PlayerA answer E",
+            "PlayerA answer F",
+            "PlayerA answer G",
+            "PlayerA answer H",
+            "PlayerA answer I",
+            "PlayerA answer L",
+            "PlayerA answer M",
+            "PlayerA answer N",
+            "PlayerA answer O",
+            "PlayerA answer P",
+            "PlayerA answer Q",
+            "PlayerA answer R",
+            "PlayerA answer S",
+            "PlayerA answer T",
+            "PlayerA answer U",
+            "PlayerA answer V",
+            "PlayerA answer Z"
+        };
+
+        // Player B
+        questionsB = new string[LTNUM] 
+        {
+            "PlayerB question A",
+            "PlayerB question B",
+            "PlayerB question C",
+            "PlayerB question D",
+            "PlayerB question E",
+            "PlayerB question F",
+            "PlayerB question G",
+            "PlayerB question H",
+            "PlayerB question I",
+            "PlayerB question L",
+            "PlayerB question M",
+            "PlayerB question N",
+            "PlayerB question O",
+            "PlayerB question P",
+            "PlayerB question Q",
+            "PlayerB question R",
+            "PlayerB question S",
+            "PlayerB question T",
+            "PlayerB question U",
+            "PlayerB question V",
+            "PlayerB question Z"
+        };
+        answersB = new string[LTNUM] 
+        {
+            "PlayerB answer A",
+            "PlayerB answer B",
+            "PlayerB answer C",
+            "PlayerB answer D",
+            "PlayerB answer E",
+            "PlayerB answer F",
+            "PlayerB answer G",
+            "PlayerB answer H",
+            "PlayerB answer I",
+            "PlayerB answer L",
+            "PlayerB answer M",
+            "PlayerB answer N",
+            "PlayerB answer O",
+            "PlayerB answer P",
+            "PlayerB answer Q",
+            "PlayerB answer R",
+            "PlayerB answer S",
+            "PlayerB answer T",
+            "PlayerB answer U",
+            "PlayerB answer V",
+            "PlayerB answer Z"
+        };  
     }
 }

@@ -369,8 +369,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250.09744, y: -24.438}
-  m_SizeDelta: {x: 230, y: 98.876}
+  m_AnchoredPosition: {x: 229.98267, y: -14.99899}
+  m_SizeDelta: {x: 200.5671, y: 71.3752}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &285001781
 MonoBehaviour:
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Answer Text
+  m_text: 'Answer Text  '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -401,8 +401,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4286530847
+  m_fontColor: {r: 0.122262, g: 0.26979676, b: 0.497, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -419,10 +419,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 37
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -586,8 +586,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -117.67, y: -24.438}
-  m_SizeDelta: {x: 500, y: 98.876}
+  m_AnchoredPosition: {x: -129.80354, y: -12.9187}
+  m_SizeDelta: {x: 380.4299, y: 100.8395}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &528000480
 MonoBehaviour:
@@ -636,10 +636,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 64.4
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -844,7 +844,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1195605057}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: AnswerIdle
         m_Mode: 1
@@ -985,6 +985,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1927037923456964605, guid: 6ecccde9547374a4988e91cefd372819, type: 3}
+      propertyPath: playerName
+      value: Player B
+      objectReference: {fileID: 0}
     - target: {fileID: 1927037923456964607, guid: 6ecccde9547374a4988e91cefd372819, type: 3}
       propertyPath: m_Name
       value: _Letters
@@ -1033,7 +1037,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: -300, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &793557436
 MonoBehaviour:
@@ -1279,8 +1283,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1195605057}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1195605059}
+        m_TargetAssemblyTypeName: UXManager, Assembly-CSharp
         m_MethodName: AnswerWrong
         m_Mode: 1
         m_Arguments:
@@ -1365,7 +1369,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &967747874
 MonoBehaviour:
@@ -1475,7 +1479,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1195605057}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: AnswerCorrect
         m_Mode: 1
@@ -1534,7 +1538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1195605058}
-  - component: {fileID: 1195605057}
+  - component: {fileID: 1195605059}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1542,37 +1546,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1195605057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195605056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdf692d3885c0b46861e4c5e552078e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionsA: []
-  questionsB: []
-  answersA: []
-  answersB: []
-  timerTextA: {fileID: 1283276378}
-  timerTextB: {fileID: 1405998627}
-  scoreA: 0
-  scoreB: 0
-  scoreTextA: {fileID: 802859240}
-  scoreTextB: {fileID: 162114447}
-  questionText: {fileID: 528000480}
-  answerText: {fileID: 285001781}
-  answerAnimator: {fileID: 2054550512}
-  activeIndexA: 0
-  activeIndexB: 0
-  PanelA: {fileID: 1200196736}
-  PanelB: {fileID: 1225464435}
-  lettersA: {fileID: 1401012954}
-  lettersB: {fileID: 790840627}
 --- !u!4 &1195605058
 Transform:
   m_ObjectHideFlags: 0
@@ -1587,6 +1560,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1195605059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195605056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aef8341a78926e4f95bd087afb31b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerA: {fileID: 1200196738}
+  playerB: {fileID: 1225464437}
+  questionText: {fileID: 528000480}
+  answerText: {fileID: 285001781}
+  questionPanelNormalSprite: {fileID: 21300000, guid: 62796a8a508687a4e89c9ef6baf5c6e5, type: 3}
+  questionPanelCorrectSprite: {fileID: 21300000, guid: b96f915df0fd23d4fb9f15d617e1487c, type: 3}
+  questionPanelWrongSprite: {fileID: 21300000, guid: e0cb4fedfba01b04e98242ff81679bc1, type: 3}
+  answerPanelAnimator: {fileID: 2054550512}
+  answerPanelCorrectSprite: {fileID: 21300000, guid: 4fbdd8c5b37c0654a92c614b66d66893, type: 3}
+  answerPanelWrongSprite: {fileID: 21300000, guid: 0744b5c355b96704db97125aeaa403d7, type: 3}
 --- !u!1 &1200196734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1593,7 @@ GameObject:
   - component: {fileID: 1200196735}
   - component: {fileID: 1200196737}
   - component: {fileID: 1200196736}
+  - component: {fileID: 1200196738}
   m_Layer: 5
   m_Name: Player A
   m_TagString: Untagged
@@ -1646,6 +1642,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200196734}
   m_CullTransparentMesh: 1
+--- !u!114 &1200196738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200196734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac785dce9b127e849b4a7e9e043495d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisPlayerIndex: 1
+  currentQA: 0
+  letters: {fileID: 1401012954}
+  secondsLeft: 180
+  timerText: {fileID: 1283276378}
+  scoreText: {fileID: 802859240}
 --- !u!1 &1225464433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,6 +1671,7 @@ GameObject:
   - component: {fileID: 1225464434}
   - component: {fileID: 1225464436}
   - component: {fileID: 1225464435}
+  - component: {fileID: 1225464437}
   m_Layer: 5
   m_Name: Player B
   m_TagString: Untagged
@@ -1705,6 +1720,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225464433}
   m_CullTransparentMesh: 1
+--- !u!114 &1225464437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225464433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac785dce9b127e849b4a7e9e043495d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisPlayerIndex: 2
+  currentQA: 0
+  letters: {fileID: 790840627}
+  secondsLeft: 180
+  timerText: {fileID: 1405998627}
+  scoreText: {fileID: 162114447}
 --- !u!1 &1243404584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,8 +2338,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1195605057}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1195605059}
+        m_TargetAssemblyTypeName: UXManager, Assembly-CSharp
         m_MethodName: AnswerIdle
         m_Mode: 1
         m_Arguments:
@@ -2394,8 +2427,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -9.840698, y: 73.875626}
-  m_SizeDelta: {x: 735.3328, y: 147.75122}
+  m_AnchoredPosition: {x: 0, y: 73.875626}
+  m_SizeDelta: {x: 750, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1645546985
 CanvasRenderer:
@@ -2487,8 +2520,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1195605057}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1195605059}
+        m_TargetAssemblyTypeName: UXManager, Assembly-CSharp
         m_MethodName: AnswerCorrect
         m_Mode: 1
         m_Arguments:
@@ -2648,8 +2681,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -116.29, y: -24.438}
-  m_SizeDelta: {x: 502.76, y: 98.876}
+  m_AnchoredPosition: {x: -125, y: -15}
+  m_SizeDelta: {x: 500, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1996086370
 MonoBehaviour:
@@ -2725,8 +2758,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -116.29, y: -24.438}
-  m_SizeDelta: {x: 502.76, y: 98.876}
+  m_AnchoredPosition: {x: -125, y: -15}
+  m_SizeDelta: {x: 500, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2054550509
 MonoBehaviour:
@@ -2926,6 +2959,10 @@ PrefabInstance:
     - target: {fileID: 1927037923456964604, guid: 6ecccde9547374a4988e91cefd372819, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927037923456964605, guid: 6ecccde9547374a4988e91cefd372819, type: 3}
+      propertyPath: playerName
+      value: Player A
       objectReference: {fileID: 0}
     - target: {fileID: 1927037923456964607, guid: 6ecccde9547374a4988e91cefd372819, type: 3}
       propertyPath: m_Name
