@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 // What does a player do:
 // - activate and stop timer
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour
     [Range (1,2)] public int thisPlayerIndex = 1;
 
     // List of couples question/answers
-    private const short LNUM = 21;
+    private const short LTNUM = 21;
     public QA[] qaCouple;
     public int currentQA = 0;
     // Letters
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour
 
     // Time
     private bool playerActive = false;
-    public int secondsLeft = 180;
+    public int tenthsLeft = 3*60*10;
     public TMP_Text timerText;
 
     // Score
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour
     {
         currentQA = 0; // Starting from A
         playerActive = false;
-        secondsLeft = 180;
+        tenthsLeft = 3*60*10;
         score = 0;
         scoreText.text = score.ToString();
         timerText.text = "3:00";
@@ -69,7 +70,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // // Show time on HUD
-        // timerText.text = (secondsLeft/60) +":"+ (secondsLeft%60).ToString("D2");   
+        // timerText.text = (tenthsLeft/60) +":"+ (tenthsLeft%60).ToString("D2");   
     }
 
     public void ActivatePlayer ()
@@ -103,13 +104,13 @@ public class Player : MonoBehaviour
     // Coroutine going on while player is active
     IEnumerator GoTimer ()
     {
-        while (playerActive && secondsLeft > 0)
+        while (playerActive && tenthsLeft > 0)
         {
             // Show time on HUD
-            timerText.text = (secondsLeft/60) +":"+ (secondsLeft%60).ToString("D2");
+            timerText.text = (tenthsLeft/600) +":"+ ((tenthsLeft/10)%60).ToString("D2");
 
-            yield return new WaitForSeconds(1.00f);
-            secondsLeft--;
+            yield return new WaitForSeconds(0.1f);
+            tenthsLeft--;
         }
     }
 
@@ -146,14 +147,20 @@ public class Player : MonoBehaviour
         // Stop timer
         StopAllCoroutines();
         // Set status of letter
-        letters.GetChild(currentQA).GetComponent<LetterButton>().SetStatus(Status.WRONG);
+        letters.GetChild(currentQA).GetComponent<LetterButton>().SetStatus(Status.IDLE);
     }
-    
+    public void AnswerReset()
+    {
+        // Restore the current letter to default and recover some time,
+        // but the timer is not stopped
+        tenthsLeft += 85; // On average, we have 8.57 seconds per answer
+        letters.GetChild(currentQA).GetComponent<LetterButton>().SetStatus(Status.DEFAULT);
+    }
 
     // TODO: Load from some text file when the game is installed
     void LoadPlayerA()
     {
-        qaCouple = new QA[LNUM] 
+        qaCouple = new QA[LTNUM] 
         {
             new QA ("pA_question1", "pA_answer1"),
             new QA ("pA_question2", "pA_answer2"),
@@ -180,7 +187,7 @@ public class Player : MonoBehaviour
     }
     void LoadPlayerB()
     {
-        qaCouple = new QA[LNUM] 
+        qaCouple = new QA[LTNUM] 
         {
             new QA ("pB_question1", "pB_answer1"),
             new QA ("pB_question2", "pB_answer2"),

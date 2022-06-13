@@ -26,6 +26,7 @@ public class UXManager : MonoBehaviour
     public Animator answerPanelAnimator;
     public Sprite answerPanelCorrectSprite;
     public Sprite answerPanelWrongSprite;
+    bool isAnswerShown = false;
 
     private void Awake() 
     {
@@ -41,7 +42,12 @@ public class UXManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Control letter progression from keyboard here or
+        // it will be fired once for every player in scene
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            SelectPreviousLetter();
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            SelectNextLetter();
     }
 
 
@@ -66,6 +72,8 @@ public class UXManager : MonoBehaviour
         // Clear the question panel while waiting for next letter to show
         questionText.text = "";
         answerText.text = "";
+        if (isAnswerShown) 
+            ResetAnswerPanel();
 
         Debug.Log("Active player: "+ activePlayer.thisPlayerIndex);
         // Remember that the timer starts by manually selecting the next letter to show
@@ -88,7 +96,8 @@ public class UXManager : MonoBehaviour
         else
             questionImage.sprite = questionPanelNormalSprite;
 
-        ResetAnswerPanel();
+        if (isAnswerShown)
+            ResetAnswerPanel();
     }
     public void ShowGivenAnswer(int index, Status status)
     {
@@ -100,11 +109,59 @@ public class UXManager : MonoBehaviour
         else
             answerImage.sprite = answerPanelWrongSprite;
     }
-
+    private void SelectNextLetter()
+    {
+        // Starting from the current index, scan the letters and find the 
+        // first with state default or idle
+        int next = activePlayer.currentQA;
+        int ltnum = activePlayer.letters.childCount;
+        for (int i = (activePlayer.currentQA+1)%ltnum; i != activePlayer.currentQA; i = (i+1)%ltnum)
+        {
+            Status status_i = activePlayer.letters.GetChild(i).GetComponent<LetterButton>().status;
+            if (status_i == Status.IDLE || status_i == Status.DEFAULT)
+            {
+                Debug.Log("Question "+i+ " not answered yet.");
+                next = i;
+                break;
+            }
+        }
+        // If we did not find unanswered letters we have returned to activePlayer.currentQA, 
+        // which could be also be the only one left. Else, let's "click" the letter
+        if (next == activePlayer.currentQA)
+            Debug.Log("This is the last active letter or the game is over");
+        else
+        {
+            activePlayer.currentQA = next;
+            activePlayer.letters.GetChild(next).GetComponent<Button>().onClick.Invoke();
+            activePlayer.letters.GetChild(next).GetComponent<Button>().Select();
+        }
+    }
+    private void SelectPreviousLetter()
+    {  
+        int previous = activePlayer.currentQA;
+        int ltnum = activePlayer.letters.childCount;
+        for (int i = ((activePlayer.currentQA-1+ltnum)%ltnum); i != activePlayer.currentQA; i = ((i-1+ltnum)%ltnum))
+        {
+            Status status_i = activePlayer.letters.GetChild(i).GetComponent<LetterButton>().status;
+            if (status_i == Status.IDLE || status_i == Status.DEFAULT)
+            {
+                Debug.Log("Question "+i+ " not answered yet.");
+                previous = i;
+                break;
+            }
+        }
+        if (previous == activePlayer.currentQA)
+            Debug.Log("This is the last active letter or the game is over");
+        else
+        {
+            activePlayer.currentQA = previous;
+            activePlayer.letters.GetChild(previous).GetComponent<Button>().onClick.Invoke();
+            activePlayer.letters.GetChild(previous).GetComponent<Button>().Select();
+        }
+    }
+    
     public void AnswerCorrect()
     {
-        Debug.Log("Player"+activePlayer.thisPlayerIndex+" answers correclty!");
-        
         // Make the player register answer correct
         activePlayer.AnswerCorrect();
         // Animate answer
@@ -112,28 +169,38 @@ public class UXManager : MonoBehaviour
     }
     public void AnswerWrong()
     {
-        Debug.Log("Player"+activePlayer.thisPlayerIndex+" got mistaken...");
-
         // Make the player register answer wrong
         activePlayer.AnswerWrong();
         // Animate answer
         AnimateAnswerPanel(Status.WRONG);
         // Wait a bit before passing control
-        StartCoroutine(DelayPlayerSwitch());
+        StartCoroutine(DelayPlayerSwitch(3.0f));
     }
     public void AnswerIdle()
     {
-        Debug.Log("Player"+activePlayer.thisPlayerIndex+" passed the turn.");
-
         // Make the player register idle question
         activePlayer.AnswerIdle();
         // Wait a bit before passing control
+        StartCoroutine(DelayPlayerSwitch(2.0f));
     }
-    IEnumerator DelayPlayerSwitch()
+    IEnumerator DelayPlayerSwitch(float delay)
     {
         yield return new WaitForSeconds(5.00f);
         // Switch control to the other player
         SwitchPlayer();
+    }
+    public void AnswerReset()
+    {
+        // Helper function to reset a letter
+        activePlayer.AnswerReset();
+        // Reset animation if it was issued
+        if (isAnswerShown)
+            ResetAnswerPanel();
+    }
+    public void RecoverTime(float seconds)
+    {
+        // Helper function to restore some time to the timer
+        activePlayer.tenthsLeft += (int)(seconds*10); 
     }
     
 
@@ -146,14 +213,19 @@ public class UXManager : MonoBehaviour
         answerPanelAnimator.SetTrigger("Show");
         ShowGivenAnswer(activePlayer.currentQA, status);
         StartCoroutine(DelayShowAnswer());
+
+        isAnswerShown = true;
     }
     private void ResetAnswerPanel()
     {
         Debug.Log("Hide answer");
 
         StopCoroutine(DelayShowAnswer());
+        answerPanelAnimator.ResetTrigger("Show");
         answerPanelAnimator.SetTrigger("Hide");
         answerText.gameObject.SetActive(false);
+
+        isAnswerShown = false;
     }
     IEnumerator DelayShowAnswer()
     {

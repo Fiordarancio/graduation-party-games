@@ -844,15 +844,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: AnswerIdle
-        m_Mode: 1
+      - m_Target: {fileID: 1195605059}
+        m_TargetAssemblyTypeName: UXManager, Assembly-CSharp
+        m_MethodName: RecoverTime
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -1479,9 +1479,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: AnswerCorrect
+      - m_Target: {fileID: 1195605059}
+        m_TargetAssemblyTypeName: UXManager, Assembly-CSharp
+        m_MethodName: AnswerReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1657,7 +1657,7 @@ MonoBehaviour:
   thisPlayerIndex: 1
   currentQA: 0
   letters: {fileID: 1401012954}
-  secondsLeft: 180
+  tenthsLeft: 1800
   timerText: {fileID: 1283276378}
   scoreText: {fileID: 802859240}
 --- !u!1 &1225464433
@@ -1735,7 +1735,7 @@ MonoBehaviour:
   thisPlayerIndex: 2
   currentQA: 0
   letters: {fileID: 790840627}
-  secondsLeft: 180
+  tenthsLeft: 1800
   timerText: {fileID: 1405998627}
   scoreText: {fileID: 162114447}
 --- !u!1 &1243404584

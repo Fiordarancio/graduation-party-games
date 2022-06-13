@@ -45,7 +45,6 @@ public class LetterButton : MonoBehaviour
         switch(status)
         {
             case Status.DEFAULT: default:
-                Debug.Log("Opening new letter");
                 // Show default sprite
                 SetSprite(defaultSprite);
                 // Start the player
@@ -56,12 +55,10 @@ public class LetterButton : MonoBehaviour
                 uxManager.ShowGivenAnswer(index, status);
             break;
             case Status.WRONG:
-                Debug.Log("Passing wrong");
                 SetSprite(wrongSprite);
                 uxManager.ShowGivenAnswer(index, status);
             break;
             case Status.IDLE:
-                Debug.Log("Passing idle");
                 SetSprite(idleSprite);
                 // Start the player
                 uxManager.StartPlayer();
