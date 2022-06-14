@@ -118,7 +118,11 @@ public class UXManager : MonoBehaviour
         if (isAnswerShown)
             ResetAnswerPanel();
     }
-    public void ShowGivenAnswer(int index, Status status)
+    public void ShowAnimatedAnswer(Status status)
+    {
+        AnimateAnswerPanel(status);
+    }
+    private void ShowGivenAnswer(int index, Status status)
     {
         activePlayer.currentQA = index;
         answerText.text = activePlayer.GetCurrentAnswer();

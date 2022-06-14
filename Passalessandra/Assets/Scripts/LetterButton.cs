@@ -57,11 +57,11 @@ public class LetterButton : MonoBehaviour
             break;
             case Status.CORRECT:
                 SetSprite(correctSprite);
-                uxManager.ShowGivenAnswer(index, status);
+                uxManager.ShowAnimatedAnswer(status);
             break;
             case Status.WRONG:
                 SetSprite(wrongSprite);
-                uxManager.ShowGivenAnswer(index, status);
+                uxManager.ShowAnimatedAnswer(status);
             break;
             case Status.IDLE:
                 SetSprite(idleSprite);
