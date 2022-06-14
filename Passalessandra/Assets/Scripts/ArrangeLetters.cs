@@ -14,7 +14,7 @@ public class ArrangeLetters : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(playerName + " has "+lettersParent.childCount+" letters to guess");
+        // Debug.Log(playerName + " has "+lettersParent.childCount+" letters to guess");
         // Step angle for each point
         float step = 2*Mathf.PI/lettersParent.childCount;
         float angle;

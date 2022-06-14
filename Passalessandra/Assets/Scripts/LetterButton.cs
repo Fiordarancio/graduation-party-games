@@ -21,13 +21,18 @@ public class LetterButton : MonoBehaviour
     public Sprite wrongSprite;
     public Sprite idleSprite;
 
+    [Header("Sounds")]
+    public AudioClip correctSound;
+    public AudioClip idleSound;
+    public AudioClip wrongSound;
+    private AudioSource letterAudio;
 
     private void Awake() 
     {
         // Try to get the UIManager and its UXManager component
         uxManager = GameObject.Find("UIManager").GetComponent<UXManager>();
+        letterAudio = GetComponent<AudioSource>();
     }
-
 
     // When the letter is clicked, it is activated
     public void SelectLetter()
@@ -66,22 +71,25 @@ public class LetterButton : MonoBehaviour
         }
     }
 
+    // A new status is set when the player answered
     public void SetStatus (Status newStatus)
     {
         switch(newStatus)
         {
             case Status.DEFAULT: default:
-                // Show default sprite
                 SetSprite(defaultSprite);
             break;
             case Status.CORRECT:
                 SetSprite(correctSprite);
+                letterAudio.PlayOneShot(correctSound, 1.0f);
             break;
             case Status.WRONG:
                 SetSprite(wrongSprite);
+                letterAudio.PlayOneShot(wrongSound, 1.0f);
             break;
             case Status.IDLE:
                 SetSprite(idleSprite);
+                letterAudio.PlayOneShot(idleSound, 1.0f);
             break;
         }
         status = newStatus;

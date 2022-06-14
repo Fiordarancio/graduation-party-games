@@ -27,6 +27,7 @@ public class UXManager : MonoBehaviour
     public Sprite answerPanelCorrectSprite;
     public Sprite answerPanelWrongSprite;
     bool isAnswerShown = false;
+    bool isInteractable = true; // false while waiting for switch
 
     private void Awake() 
     {
@@ -43,11 +44,28 @@ public class UXManager : MonoBehaviour
     void Update()
     {
         // Control letter progression from keyboard here or
-        // it will be fired once for every player in scene
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            SelectPreviousLetter();
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-            SelectNextLetter();
+        // it will be fired once for every player in scene.
+        // Avoided Arrows and WASD because Unity already uses
+        // them to change button selection (TODO can be disabled?)
+        // Moreover we use keys to control validation buttons
+        if (isInteractable)
+        {
+            if (Input.GetKeyDown(KeyCode.Z)) // left
+                SelectPreviousLetter();
+            if (Input.GetKeyDown(KeyCode.C)) // right
+                SelectNextLetter();
+            
+            if (Input.GetKeyDown(KeyCode.F))
+                AnswerCorrect();
+            if (Input.GetKeyDown(KeyCode.G))
+                AnswerIdle();
+            if (Input.GetKeyDown(KeyCode.H))
+                AnswerWrong();
+            if (Input.GetKeyDown(KeyCode.N))
+                AnswerReset();
+            if (Input.GetKeyDown(KeyCode.M))
+                RecoverTime(2.00f);
+        }
     }
 
 
@@ -75,7 +93,8 @@ public class UXManager : MonoBehaviour
         if (isAnswerShown) 
             ResetAnswerPanel();
 
-        Debug.Log("Active player: "+ activePlayer.thisPlayerIndex);
+        isInteractable = true;
+        // Debug.Log("Active player: "+ activePlayer.thisPlayerIndex);
         // Remember that the timer starts by manually selecting the next letter to show
     }
     public void StartPlayer()
@@ -110,7 +129,7 @@ public class UXManager : MonoBehaviour
             answerImage.sprite = answerPanelWrongSprite;
     }
     private void SelectNextLetter()
-    {
+    { 
         // Starting from the current index, scan the letters and find the 
         // first with state default or idle
         int next = activePlayer.currentQA;
@@ -120,7 +139,7 @@ public class UXManager : MonoBehaviour
             Status status_i = activePlayer.letters.GetChild(i).GetComponent<LetterButton>().status;
             if (status_i == Status.IDLE || status_i == Status.DEFAULT)
             {
-                Debug.Log("Question "+i+ " not answered yet.");
+                // Debug.Log("Question "+i+ " not answered yet.");
                 next = i;
                 break;
             }
@@ -145,7 +164,7 @@ public class UXManager : MonoBehaviour
             Status status_i = activePlayer.letters.GetChild(i).GetComponent<LetterButton>().status;
             if (status_i == Status.IDLE || status_i == Status.DEFAULT)
             {
-                Debug.Log("Question "+i+ " not answered yet.");
+                // Debug.Log("Question "+i+ " not answered yet.");
                 previous = i;
                 break;
             }
@@ -169,6 +188,8 @@ public class UXManager : MonoBehaviour
     }
     public void AnswerWrong()
     {
+        // Block other input
+        isInteractable = false;
         // Make the player register answer wrong
         activePlayer.AnswerWrong();
         // Animate answer
@@ -178,6 +199,8 @@ public class UXManager : MonoBehaviour
     }
     public void AnswerIdle()
     {
+        // Block other input
+        isInteractable = false;
         // Make the player register idle question
         activePlayer.AnswerIdle();
         // Wait a bit before passing control
@@ -185,7 +208,7 @@ public class UXManager : MonoBehaviour
     }
     IEnumerator DelayPlayerSwitch(float delay)
     {
-        yield return new WaitForSeconds(5.00f);
+        yield return new WaitForSeconds(delay);
         // Switch control to the other player
         SwitchPlayer();
     }
@@ -206,10 +229,8 @@ public class UXManager : MonoBehaviour
 
     private void AnimateAnswerPanel(Status status)
     {
-        Debug.Log("Show answer");
-
         // Reset hide trigger in case it had been called previously
-        answerPanelAnimator.ResetTrigger("Hide");
+        // answerPanelAnimator.ResetTrigger("Hide");
         answerPanelAnimator.SetTrigger("Show");
         ShowGivenAnswer(activePlayer.currentQA, status);
         StartCoroutine(DelayShowAnswer());
@@ -218,10 +239,8 @@ public class UXManager : MonoBehaviour
     }
     private void ResetAnswerPanel()
     {
-        Debug.Log("Hide answer");
-
         StopCoroutine(DelayShowAnswer());
-        answerPanelAnimator.ResetTrigger("Show");
+        // answerPanelAnimator.ResetTrigger("Show");
         answerPanelAnimator.SetTrigger("Hide");
         answerText.gameObject.SetActive(false);
 
