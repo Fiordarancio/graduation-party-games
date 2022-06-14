@@ -152,9 +152,12 @@ public class Player : MonoBehaviour
     public void AnswerReset()
     {
         // Restore the current letter to default and recover some time,
-        // but the timer is not stopped
+        // but the timer is not stopped. Plus, reset score
         tenthsLeft += 85; // On average, we have 8.57 seconds per answer
-        letters.GetChild(currentQA).GetComponent<LetterButton>().SetStatus(Status.DEFAULT);
+        LetterButton lb = letters.GetChild(currentQA).GetComponent<LetterButton>();
+        if (lb.status == Status.CORRECT)
+            score--;
+        lb.SetStatus(Status.DEFAULT);
     }
 
     // TODO: Load from some text file when the game is installed
