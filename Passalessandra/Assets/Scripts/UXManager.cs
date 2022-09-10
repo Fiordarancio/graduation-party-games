@@ -22,6 +22,7 @@ public class UXManager : MonoBehaviour
     private Image answerImage; 
     public Sprite questionPanelNormalSprite;
     public Sprite questionPanelCorrectSprite;
+    public Sprite questionPanelIdleSprite;
     public Sprite questionPanelWrongSprite;
     public Animator answerPanelAnimator;
     public Sprite answerPanelCorrectSprite;
@@ -127,10 +128,20 @@ public class UXManager : MonoBehaviour
         activePlayer.currentQA = index;
         answerText.text = activePlayer.GetCurrentAnswer();
 
-        if (status == Status.CORRECT)
-            answerImage.sprite = answerPanelCorrectSprite;
-        else
-            answerImage.sprite = answerPanelWrongSprite;
+        switch (status)
+        {
+            case Status.CORRECT:
+                questionImage.sprite = questionPanelCorrectSprite;
+                answerImage.sprite = answerPanelCorrectSprite;
+                break;
+            case Status.IDLE:
+                questionImage.sprite = questionPanelIdleSprite;
+                break;
+            case Status.WRONG:
+                questionImage.sprite = questionPanelWrongSprite;
+                answerImage.sprite = answerPanelWrongSprite;
+                break;
+        }
     }
     private void SelectNextLetter()
     { 
@@ -220,21 +231,22 @@ public class UXManager : MonoBehaviour
     {
         // Helper function to reset a letter
         activePlayer.AnswerReset();
-        // Reset animation if it was issued
+        // Reset question and animation if it was issued
+        questionImage.sprite = questionPanelNormalSprite;
         if (isAnswerShown)
             ResetAnswerPanel();
     }
     public void RecoverTime(float seconds)
     {
         // Helper function to restore some time to the timer
-        activePlayer.tenthsLeft += (int)(seconds*10); 
+        activePlayer.RestoreTime(seconds);
     }
     
 
     private void AnimateAnswerPanel(Status status)
     {
         // Reset hide trigger in case it had been called previously
-        // answerPanelAnimator.ResetTrigger("Hide");
+        answerPanelAnimator.ResetTrigger("Hide");
         answerPanelAnimator.SetTrigger("Show");
         ShowGivenAnswer(activePlayer.currentQA, status);
         StartCoroutine(DelayShowAnswer());
@@ -244,7 +256,7 @@ public class UXManager : MonoBehaviour
     private void ResetAnswerPanel()
     {
         StopCoroutine(DelayShowAnswer());
-        // answerPanelAnimator.ResetTrigger("Show");
+        answerPanelAnimator.ResetTrigger("Show");
         answerPanelAnimator.SetTrigger("Hide");
         answerText.gameObject.SetActive(false);
 

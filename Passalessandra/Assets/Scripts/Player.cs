@@ -33,8 +33,9 @@ public class Player : MonoBehaviour
     public Transform letters;
 
     // Time
+    private const int MAXTIME = 3*60*10;
     private bool playerActive = false;
-    public int tenthsLeft = 3*60*10;
+    public int tenthsLeft = 0;
     public TMP_Text timerText;
 
     // Score
@@ -43,7 +44,6 @@ public class Player : MonoBehaviour
 
     // Canvas group to make transition
     private CanvasGroup canvasGroup;
-
 
     private void Awake() 
     {
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     {
         currentQA = 0; // Starting from A
         playerActive = false;
-        tenthsLeft = 3*60*10;
+        tenthsLeft = MAXTIME;
         score = 0;
         scoreText.text = score.ToString();
         timerText.text = "3:00";
@@ -69,8 +69,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // // Show time on HUD
-        // timerText.text = (tenthsLeft/60) +":"+ (tenthsLeft%60).ToString("D2");   
+        
     }
 
     public void ActivatePlayer ()
@@ -154,10 +153,16 @@ public class Player : MonoBehaviour
         // Restore the current letter to default and recover some time,
         // but the timer is not stopped. Plus, reset score
         tenthsLeft += 85; // On average, we have 8.57 seconds per answer
+        if (tenthsLeft > MAXTIME) tenthsLeft = MAXTIME;
         LetterButton lb = letters.GetChild(currentQA).GetComponent<LetterButton>();
         if (lb.status == Status.CORRECT)
             score--;
         lb.SetStatus(Status.DEFAULT);
+    }
+    public void RestoreTime(float seconds)
+    {
+        tenthsLeft += (int)(seconds*10); 
+        if (tenthsLeft > MAXTIME) tenthsLeft = MAXTIME;
     }
 
     // TODO: Load from some text file when the game is installed
@@ -185,13 +190,12 @@ public class Player : MonoBehaviour
             new QA ("pA_question18", "pA_answer18"),
             new QA ("pA_question19", "pA_answer19"),
             new QA ("pA_question20", "pA_answer20"),
-            new QA ("pA_question21", "pA_answer21"),
+            new QA ("pA_question21", "pA_answer21")
         };
     }
     void LoadPlayerB()
     {
-        qaCouple = new QA[LTNUM] 
-        {
+        qaCouple = new QA[LTNUM]{
             new QA ("pB_question1", "pB_answer1"),
             new QA ("pB_question2", "pB_answer2"),
             new QA ("pB_question3", "pB_answer3"),
@@ -212,7 +216,7 @@ public class Player : MonoBehaviour
             new QA ("pB_question18", "pB_answer18"),
             new QA ("pB_question19", "pB_answer19"),
             new QA ("pB_question20", "pB_answer20"),
-            new QA ("pB_question21", "pB_answer21"),
+            new QA ("pB_question21", "pB_answer21")
         };
     }
 }
