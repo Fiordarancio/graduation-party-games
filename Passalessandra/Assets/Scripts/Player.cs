@@ -168,6 +168,9 @@ public class Player : MonoBehaviour
     // TODO: Load from some text file when the game is installed
     void LoadPlayerA()
     {
+        // SaveLoadSystem.SaveSession();
+        SaveLoadSystem.LoadSession();
+        /*
         qaCouple = new QA[LTNUM] 
         {
             new QA ("pA_question1", "pA_answer1"),
@@ -191,8 +194,9 @@ public class Player : MonoBehaviour
             new QA ("pA_question19", "pA_answer19"),
             new QA ("pA_question20", "pA_answer20"),
             new QA ("pA_question21", "pA_answer21")
-        };
+        }; */
     }
+
     void LoadPlayerB()
     {
         qaCouple = new QA[LTNUM]{

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fdae1ab3680513c40841bf89ea7f8e9e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b6a27a5a9779b4e45a370e99e7a0e8e8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -841,7 +841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cb1791c85dbda894793464ed06b320b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 13b4b2226f313334a9994b02ed2c9694, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1673,7 +1673,7 @@ MonoBehaviour:
   answerText: {fileID: 285001781}
   questionPanelNormalSprite: {fileID: 21300000, guid: ce655a91ac349f0409ef359178ea3fab, type: 3}
   questionPanelCorrectSprite: {fileID: 21300000, guid: b96f915df0fd23d4fb9f15d617e1487c, type: 3}
-  questionPanelIdleSprite: {fileID: 0}
+  questionPanelIdleSprite: {fileID: 21300000, guid: 321790d649d8897409e2c4d300f26a36, type: 3}
   questionPanelWrongSprite: {fileID: 21300000, guid: e0cb4fedfba01b04e98242ff81679bc1, type: 3}
   answerPanelAnimator: {fileID: 2054550512}
   answerPanelCorrectSprite: {fileID: 21300000, guid: 4fbdd8c5b37c0654a92c614b66d66893, type: 3}

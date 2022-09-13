@@ -8,6 +8,7 @@ using UnityEngine.UI;
 // to switch between each other. Moreover, it updates the texts on the hud
 public class UXManager : MonoBehaviour
 {
+
     [Header("Players data")]
     public Player playerA;
     public Player playerB;
