@@ -1,6 +1,7 @@
 # Passalessandra 
-### (just a nice, customizable Passaparola)
-
+ Just a nice, customizable Passaparola.
+ 
+![Example of game loop.](https://github.com/Fiordarancio/graduation-party-games/blob/main/Passalessandra/docs/example_game_loop.png "Example of game loop")
 
 # Goal
  Players are asked questions whose answer begins with a given letter of the alphabet. It's like solving a clue in a crossword when you already know the first letter of the answer. Example: 
