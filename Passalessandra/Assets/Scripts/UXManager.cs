@@ -36,7 +36,6 @@ public class UXManager : MonoBehaviour
         questionImage = GameObject.Find("Question Panel").GetComponent<Image>();   
         answerImage = GameObject.Find("Answer Panel").GetComponent<Image>();
 
-        SaveLoadSystem.SaveSession();
     }
     // Start is called before the first frame update
     void Start()

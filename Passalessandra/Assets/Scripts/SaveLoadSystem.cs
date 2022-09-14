@@ -56,6 +56,7 @@ public class SaveLoadSystem : MonoBehaviour
             string fileText = File.ReadAllText(filePath);
             QAList data = JsonUtility.FromJson<QAList>(fileText);
         
+            Debug.Log("Loaded data for "+playerName);
             // Assign in player
             return data;
         }

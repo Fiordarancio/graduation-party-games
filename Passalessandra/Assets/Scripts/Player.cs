@@ -151,12 +151,12 @@ public class Player : MonoBehaviour
     // Load from JSON file if existing
     void LoadPlayerA()
     {
-        SaveLoadSystem.LoadSession(SaveLoadSystem.savePathPlayerA, "pA");
+        myQA = SaveLoadSystem.LoadSession(SaveLoadSystem.savePathPlayerA, "pA");
     }
 
     void LoadPlayerB()
     {
-        SaveLoadSystem.LoadSession(SaveLoadSystem.savePathPlayerB, "pB");
+        myQA = SaveLoadSystem.LoadSession(SaveLoadSystem.savePathPlayerB, "pB");
 
         // First brute force initialization was the following
         // qaCouple = new QA[LTNUM]{
