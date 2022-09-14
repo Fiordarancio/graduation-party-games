@@ -1,7 +1,7 @@
 ### Passalessandra (the brand new customizable Passaparola)
 
 # Goal
-Players are asked questions whose answer begins with a given letter of the alphabet. It's like solving a clue in a crossword when you already know the first letter of the answer. Example: 
+ Players are asked questions whose answer begins with a given letter of the alphabet. It's like solving a clue in a crossword when you already know the first letter of the answer. Example: 
 
 ```
 "You must have one to log in" -> "Account"
@@ -17,7 +17,7 @@ During each question, each player can answer or pass. If they answer correctly t
 The player who answers all or most questions first wins.
 
 # Controls
-By default, the control activates the left player's UI.
+ By default, the control activates the left player's UI.
 
 Use mouse click to select the letter to activate and start playing. 
 The green button sets that letter as correct, while the yellow one as idle and the red one as wrong. In the last two cases, the control is passed to the other player.
@@ -33,12 +33,15 @@ Each of the aformentioned controls can be issued by keyboard. Press:
 * M to restore time
 
 # Prepare your questions
-You can put your desired questions/clues for each player into a JSON file named `custom_qaA.json` and `custom_qaB.json`. You can a template in this repository. 
+ The application would automatically save custom question-answer pairs into JSON files, that resede in the (persistent data directiory)[https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html], under the folder `savings`. Once started, the application will search for a JSON file via the following paths:
 
-The application will search for these files via PersistentPath, so put them into (the folder that your OS requires)[https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html].
+```
+Application.persistentDataPath + /savings/custom_qas_playerA.json 
+Application.persistentDataPath + /savings/custom_qas_playerB.json
+```
 
-When the game starts, these lists will be loaded for the two players.
+You can find a template for questions in this repo. The application will search for these files via (Application.persistentDataPath)[https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html], so put them into the folder that your OS requires. If there is no such file, predefined lists will be loaded
 
 # Coming soon
 * Add menus
-* Load custom images for your player's profile.
+* Load custom images for players' profile
