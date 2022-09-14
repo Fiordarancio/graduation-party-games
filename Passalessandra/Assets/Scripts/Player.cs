@@ -11,23 +11,12 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public class QA {
-        public string question;
-        public string answer;
-
-        public QA (string question, string answer)
-        {
-            this.question = question;
-            this.answer = answer;
-        }
-    };
 
     // Which is this player? (decide which QA list)
     [Range (1,2)] public int thisPlayerIndex = 1;
 
     // List of couples question/answers
-    private const short LTNUM = 21;
-    public QA[] qaCouple;
+    public QAList myQA;
     public int currentQA = 0;
     // Letters
     public Transform letters;
@@ -64,12 +53,6 @@ public class Player : MonoBehaviour
         score = 0;
         scoreText.text = score.ToString();
         timerText.text = "3:00";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void ActivatePlayer ()
@@ -116,11 +99,11 @@ public class Player : MonoBehaviour
 
     public string GetCurrentQuestion()
     {
-        return qaCouple[currentQA].question;
+        return myQA.list[currentQA].question;
     }
     public string GetCurrentAnswer()
     {
-        return qaCouple[currentQA].answer;
+        return myQA.list[currentQA].answer;
     }
 
     public void AnswerCorrect()
@@ -165,62 +148,39 @@ public class Player : MonoBehaviour
         if (tenthsLeft > MAXTIME) tenthsLeft = MAXTIME;
     }
 
-    // TODO: Load from some text file when the game is installed
+    // Load from JSON file if existing
     void LoadPlayerA()
     {
-        // SaveLoadSystem.SaveSession();
-        SaveLoadSystem.LoadSession();
-        /*
-        qaCouple = new QA[LTNUM] 
-        {
-            new QA ("pA_question1", "pA_answer1"),
-            new QA ("pA_question2", "pA_answer2"),
-            new QA ("pA_question3", "pA_answer3"),
-            new QA ("pA_question4", "pA_answer4"),
-            new QA ("pA_question5", "pA_answer5"),
-            new QA ("pA_question6", "pA_answer6"),
-            new QA ("pA_question7", "pA_answer7"),
-            new QA ("pA_question8", "pA_answer8"),
-            new QA ("pA_question9", "pA_answer9"),
-            new QA ("pA_question10", "pA_answer10"),
-            new QA ("pA_question11", "pA_answer11"),
-            new QA ("pA_question12", "pA_answer12"),
-            new QA ("pA_question13", "pA_answer13"),
-            new QA ("pA_question14", "pA_answer14"),
-            new QA ("pA_question15", "pA_answer15"),
-            new QA ("pA_question16", "pA_answer16"),
-            new QA ("pA_question17", "pA_answer17"),
-            new QA ("pA_question18", "pA_answer18"),
-            new QA ("pA_question19", "pA_answer19"),
-            new QA ("pA_question20", "pA_answer20"),
-            new QA ("pA_question21", "pA_answer21")
-        }; */
+        SaveLoadSystem.LoadSession(SaveLoadSystem.savePathPlayerA, "pA");
     }
 
     void LoadPlayerB()
     {
-        qaCouple = new QA[LTNUM]{
-            new QA ("pB_question1", "pB_answer1"),
-            new QA ("pB_question2", "pB_answer2"),
-            new QA ("pB_question3", "pB_answer3"),
-            new QA ("pB_question4", "pB_answer4"),
-            new QA ("pB_question5", "pB_answer5"),
-            new QA ("pB_question6", "pB_answer6"),
-            new QA ("pB_question7", "pB_answer7"),
-            new QA ("pB_question8", "pB_answer8"),
-            new QA ("pB_question9", "pB_answer9"),
-            new QA ("pB_question10", "pB_answer10"),
-            new QA ("pB_question11", "pB_answer11"),
-            new QA ("pB_question12", "pB_answer12"),
-            new QA ("pB_question13", "pB_answer13"),
-            new QA ("pB_question14", "pB_answer14"),
-            new QA ("pB_question15", "pB_answer15"),
-            new QA ("pB_question16", "pB_answer16"),
-            new QA ("pB_question17", "pB_answer17"),
-            new QA ("pB_question18", "pB_answer18"),
-            new QA ("pB_question19", "pB_answer19"),
-            new QA ("pB_question20", "pB_answer20"),
-            new QA ("pB_question21", "pB_answer21")
-        };
+        SaveLoadSystem.LoadSession(SaveLoadSystem.savePathPlayerB, "pB");
+
+        // First brute force initialization was the following
+        // qaCouple = new QA[LTNUM]{
+        //     new QA ("pB_question1", "pB_answer1"),
+        //     new QA ("pB_question2", "pB_answer2"),
+        //     new QA ("pB_question3", "pB_answer3"),
+        //     new QA ("pB_question4", "pB_answer4"),
+        //     new QA ("pB_question5", "pB_answer5"),
+        //     new QA ("pB_question6", "pB_answer6"),
+        //     new QA ("pB_question7", "pB_answer7"),
+        //     new QA ("pB_question8", "pB_answer8"),
+        //     new QA ("pB_question9", "pB_answer9"),
+        //     new QA ("pB_question10", "pB_answer10"),
+        //     new QA ("pB_question11", "pB_answer11"),
+        //     new QA ("pB_question12", "pB_answer12"),
+        //     new QA ("pB_question13", "pB_answer13"),
+        //     new QA ("pB_question14", "pB_answer14"),
+        //     new QA ("pB_question15", "pB_answer15"),
+        //     new QA ("pB_question16", "pB_answer16"),
+        //     new QA ("pB_question17", "pB_answer17"),
+        //     new QA ("pB_question18", "pB_answer18"),
+        //     new QA ("pB_question19", "pB_answer19"),
+        //     new QA ("pB_question20", "pB_answer20"),
+        //     new QA ("pB_question21", "pB_answer21")
+        // };
     }
 }

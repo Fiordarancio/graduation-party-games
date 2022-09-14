@@ -6,77 +6,47 @@ using System.IO;
 
 public class SaveLoadSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public const string savePathPlayerA = "/savings/custom_qas_playerA.json";
+    public const string savePathPlayerB = "/savings/custom_qas_playerB.json";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    // ITALIAN ALPHABET
-    public const int LTNUM = 21;
-
-    [System.Serializable]
-    public class CustomQA {
-        public string question;
-        public string answer;
-
-        public CustomQA (string question, string answer)
-        {
-            this.question = question;
-            this.answer = answer;
-        }
-    }
-    [System.Serializable]
-    public class QAList {
-        public CustomQA[] list;
-    }
-
-    private static string savePath = "/savings/custom_qas.json";
-
+    // Utility method to save and use a predefined question-answer
+    // list in case it has not been prepared in advance
     public static void SaveSession()
     {
         // Create an instance of the object we must serialize 
-        QAList data = new QAList();
-        data.list = new CustomQA [LTNUM] 
-        {
-            new CustomQA ("pA_question1", "pA_answer1"),
-            new CustomQA ("pA_question2", "pA_answer2"),
-            new CustomQA ("pA_question3", "pA_answer3"),
-            new CustomQA ("pA_question4", "pA_answer4"),
-            new CustomQA ("pA_question5", "pA_answer5"),
-            new CustomQA ("pA_question6", "pA_answer6"),
-            new CustomQA ("pA_question7", "pA_answer7"),
-            new CustomQA ("pA_question8", "pA_answer8"),
-            new CustomQA ("pA_question9", "pA_answer9"),
-            new CustomQA ("pA_question10", "pA_answer10"),
-            new CustomQA ("pA_question11", "pA_answer11"),
-            new CustomQA ("pA_question12", "pA_answer12"),
-            new CustomQA ("pA_question13", "pA_answer13"),
-            new CustomQA ("pA_question14", "pA_answer14"),
-            new CustomQA ("pA_question15", "pA_answer15"),
-            new CustomQA ("pA_question16", "pA_answer16"),
-            new CustomQA ("pA_question17", "pA_answer17"),
-            new CustomQA ("pA_question18", "pA_answer18"),
-            new CustomQA ("pA_question19", "pA_answer19"),
-            new CustomQA ("pA_question20", "pA_answer20"),
-            new CustomQA ("pA_question21", "pA_answer21")
-        };
-
+        QAList pA_data = LoadStandardPlayer("pA");
+        
         // Serialize in JSON and save the string as a file
-        string fileText = JsonUtility.ToJson(data);
+        string fileText = JsonUtility.ToJson(pA_data);
+
         // Check if the path exist (create folders if not) then write file
-        File.WriteAllText(Application.persistentDataPath + savePath, fileText);
+        string filePath = Application.persistentDataPath + savePathPlayerA;
+        if (File.Exists(filePath))
+            File.WriteAllText(filePath, fileText);
+        else 
+        {
+            FileInfo file = new FileInfo(filePath);
+            file.Directory.Create(); // If the directory already exists, this method does nothing.
+            File.WriteAllText(file.FullName, fileText);
+        }
+
+        // Just repeat for player B
+        QAList pB_data = LoadStandardPlayer("pB");
+        fileText = JsonUtility.ToJson(pB_data);
+        filePath = Application.persistentDataPath + savePathPlayerB;
+        if (File.Exists(filePath))
+            File.WriteAllText(filePath, fileText);
+        else 
+        {
+            FileInfo file = new FileInfo(filePath);
+            file.Directory.Create(); // If the directory already exists, this method does nothing.
+            File.WriteAllText(file.FullName, fileText);
+        }
 
         Debug.Log("Data saved!");
     }
 
-    public static void LoadSession()
+    public static QAList LoadSession(string savePath, string playerName)
     {
         // Get the file from which we want to serialize and check it's existence
         string filePath = Application.persistentDataPath + savePath;
@@ -85,15 +55,26 @@ public class SaveLoadSystem : MonoBehaviour
             // Deserialize and transfer info to the manager
             string fileText = File.ReadAllText(filePath);
             QAList data = JsonUtility.FromJson<QAList>(fileText);
-
-            Debug.Log("Data retrieved: ");
-            foreach (CustomQA element in data.list)
-            {
-                Debug.Log(element.question + ", " + element.answer);
-            }
         
             // Assign in player
+            return data;
+        }
+        else 
+        {
+            Debug.Log("No data saved at: "+savePath);
+            return LoadStandardPlayer(playerName);
         }
 
+    }
+
+    // In case anything isn't ready, load a placeholder list of questions
+    public static QAList LoadStandardPlayer(string playerName)
+    {
+        QAList standard = new QAList();
+        standard.list = new CustomQA [QAList.LTNUM];
+        for (int i = 0; i < QAList.LTNUM; i++)
+            standard.list[i] = 
+                new CustomQA (playerName+"_question"+(i+1), playerName+"_answer"+(i+1));
+        return standard;
     }
 }

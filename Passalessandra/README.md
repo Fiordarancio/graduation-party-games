@@ -9,10 +9,10 @@ Players are asked questions whose answer begins with a given letter of the alpha
 ...
 ```
 
-Answers can be single or multiple words, names or whatever you'd like. As a rule of thumb, take the very first letter of the expression the one that matters.
+Answers can be single or multiple words, names or whatever you'd like. As a rule of thumb, take the very first letter of the expression as the one that matters.
 
 Players have limited time to answer all or most questions. 
-During each question, each player can answer or pass. If they answer correctly they can go on to the next question; if they fail or pass, their game pauses and the opponent starts playing. When a player wants to pass, they say: "Passalessandra!" (or every magic word of your choice).
+During each question, each player can answer or pass. If they answer correctly they can go on to the next question; if they fail or pass, their game pauses and the opponent starts playing. When a player wants to pass, they say: "Passalessandra!" (or any magic word of your choice).
 
 The player who answers all or most questions first wins.
 
@@ -39,6 +39,6 @@ The application will search for these files via PersistentPath, so put them into
 
 When the game starts, these lists will be loaded for the two players.
 
-## Coming soon
+# Coming soon
 * Add menus
 * Load custom images for your player's profile.
