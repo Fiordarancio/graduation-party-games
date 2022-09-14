@@ -47,3 +47,8 @@ You can find a template for questions in this repo. The application will search 
 # Coming soon
 * Add menus
 * Load custom images for players' profile
+
+# Disclaimer
+ The main loop music has been sampled from the original show on YouTube. All rights belong to the respective owners.
+ 
+ Other sound fx are under free license.
