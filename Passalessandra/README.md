@@ -1,4 +1,6 @@
-### Passalessandra (the brand new customizable Passaparola)
+# Passalessandra 
+### (just a nice, customizable Passaparola)
+
 
 # Goal
  Players are asked questions whose answer begins with a given letter of the alphabet. It's like solving a clue in a crossword when you already know the first letter of the answer. Example: 
