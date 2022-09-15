@@ -63,6 +63,7 @@ public class SaveLoadSystem : MonoBehaviour
         else 
         {
             Debug.Log("No data saved at: "+savePath);
+            SaveSession();
             return LoadStandardPlayer(playerName);
         }
 

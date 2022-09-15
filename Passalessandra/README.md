@@ -43,7 +43,7 @@ Application.persistentDataPath + /savings/custom_qas_playerA.json
 Application.persistentDataPath + /savings/custom_qas_playerB.json
 ```
 
-You can find a template for questions in this repo. The application will search for these files via [Application.persistentDataPath](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html), so put them into the folder that your OS requires. If there is no such file, predefined lists will be loaded
+You can find a template for questions in this repo. The application will search for these files via [Application.persistentDataPath](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html), so put them into the folder that your OS requires. If there is no such file, predefined lists will be loaded and saved so that it will be easier for you to find the files later.
 
 # Coming soon
 * Add menus
