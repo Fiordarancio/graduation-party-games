@@ -36,14 +36,14 @@ Each of the aformentioned controls can be issued by keyboard. Press:
 * M to restore time
 
 # Prepare your questions
- The application would automatically save custom question-answer pairs into JSON files, that resede in the (persistent data directiory)[https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html], under the folder `savings`. Once started, the application will search for a JSON file via the following paths:
+ The application would automatically save custom question-answer pairs into JSON files, that resede in the [persistent data directiory](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html), under the folder `savings`. Once started, the application will search for a JSON file via the following paths:
 
 ```
 Application.persistentDataPath + /savings/custom_qas_playerA.json 
 Application.persistentDataPath + /savings/custom_qas_playerB.json
 ```
 
-You can find a template for questions in this repo. The application will search for these files via (Application.persistentDataPath)[https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html], so put them into the folder that your OS requires. If there is no such file, predefined lists will be loaded
+You can find a template for questions in this repo. The application will search for these files via [Application.persistentDataPath](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html), so put them into the folder that your OS requires. If there is no such file, predefined lists will be loaded
 
 # Coming soon
 * Add menus
